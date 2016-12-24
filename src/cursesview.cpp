@@ -1,34 +1,39 @@
 #include <iostream>
-#include "view.h"
+#include <conio.h>
+#include "../include/cursesview.h"
 //#define DEBUG
 
 char players[2] = { 'O', 'X' };
 
-View::View(Board& board): board(board) {
+void move_cursor(char c){
+
 }
 
-void View::showBoard() {
-	for (int i = 0; i < 10; i++) {
-		for (int j = 0; j < 10; j++)
-			std::cout << board.getCell(i, j);
-		std::cout << '\n';
-	}
-		
+CView::CView(Board& board): board(board) {
+	initscr();
+	keypad(stdsrc, 1);
 }
 
-void View::doGameCycle() {
+CView::~CView(){
+	endwin();
+}
+
+void CView::showBoard() {
+	refresh();
+}
+
+void CView::doGameCycle() {
 	int cur = 0;
 	while (board.isWin() == in_progress) {
+		int x = 0;
+		int y = 0;
+		//move(0, 0);
 		showBoard();
+		char c = getch();
+
 		std::cout << players[cur] << " move: ";
-		int x, y;
-		std::cin >> x >> y;
-		//std::cout << '\n';
 		while (!(x == -1 && y == -1) && !board.canMove(x, y)) {
 			std::cout << "Bad move!\n";
-#ifdef DEBUG
-			std::cout << board.getCell(x, y) << '\n';
-#endif // DEBUG
 			std::cout << players[cur] << " move: ";
 			std::cin >> x >> y;
 		}

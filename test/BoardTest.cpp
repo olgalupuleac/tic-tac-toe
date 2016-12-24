@@ -1,4 +1,4 @@
-#include "BoardTest.h"
+#include "../include/BoardTest.h"
 
 void BoardTest::testGetCell1() {
 	Board b;

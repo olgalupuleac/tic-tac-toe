@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <utility>
-#include "board.h"
+#include "../include/board.h"
 
 std::pair<int, int> shifts[] = { std::make_pair(1, 0) ,
                                  std::make_pair(0, 1) , 
